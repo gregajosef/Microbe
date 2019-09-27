@@ -80,7 +80,10 @@ abstract class AbstractForm implements FormInterface{
 		}
 		foreach ($this->fields as $field => $attributes) {
 			if(false === in_array($attributes['type'],['separator','void'])){
-				if(true === in_array($attributes['type'],['checkbox','button'])){
+				if(true === in_array($attributes['type'],['checkbox'])){
+					$this->data[$field] = isset($basePostData[$field]) && boolval($basePostData[$field]);
+				}
+				else if(true === in_array($attributes['type'],['button'])){
 					$this->data[$field] = isset($basePostData[$field]);
 				}
 				else if(true === in_array($attributes['type'],['file'])){
